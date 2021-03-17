@@ -1,0 +1,58 @@
+EL EJERSISIO:
+
+Tenemos que crear la estructura básica de un videojuego RPG de peleas, para lo cual necesitaremos la siguiente
+estructura de paquetes(P), clases(C) e interfaces(I):
+
+            Master Class(P)
+                  |
+                  |
+    -----------------------------------------------------------------
+    |             |             |           |                       |
+    |             |             |           |                       |
+Characters(P)  Models(P)     Utils(P)   GameController(C)          Tests(P)
+     |              |           |                                    |
+-------------       |           |                               GublinTest(C)
+|           |       |      ------------------------------------------------
+|           |       |   Messages(C)    TimelineFailedException(C)     GreetingsNotFoundException(C)
+Player(C)   |       |
+        Gublin(C)   |
+                    |
+               -------------
+               |           |
+           ICharacter(I)  Character(C)
+
+
+Las clases Player y Gublin heredan de la clase Character, y por herencia implementan la interfaz ICharacter.
+
+La lógica base del juego se implementa en la clase GameController, que gestionará el inicio y el final del juego,
+así como una lista de enemigos de tipo Gublin y la instancia de la clase Player para el jugador.
+
+La lista de Gublins debe ser un List de tipo Characters (Polimorfismo).
+
+Al iniciar el juego, desde el Game Controller se le pedirá al jugador que elija la dificultad del juego.
+Dependiendo de la dificultad, del 1 al 3, se llenará la lista de Gublins con 3 (Dificultad 1), 6 (Dificultad 2) o
+9 (Dificultad 3) Gublins, con estadísticas incrementales, es decir, el siguiente será mas fuerte que el anterior.
+En cada ronda del juego, gestionada desde el GameController, el jugador se enfrentará a un gublin, hasta que uno de los
+dos muera. Si el jugador muere, se acaba el juego y se devuelve una excepción de tipo "TimelineFailedException". Si
+el gublin muere, le dará 50 de experiencia al jugador.
+
+Las acciones del jugador las decidirá el propio jugador turno a turno, pudiendo atacar o curarse.
+Las acciones de los Gublins se deciden aleatoriamente cada turno (Se generará un número del 1 al 3, y cuando el resultado
+sea 1 se curará mientras que cuando sea 2 o 3 atacará).
+
+Al finalizar la ronda, si el jugador ha subido de nivel, se incrementarán sus estadísticas.
+
+Tanto la clase Player como la clase Gublin tienen que implementar los métodos de la interfaz ICharacter, y heredar
+los setter y getter de la clase padre Character.
+
+Cuando el jugador derrota a todos los Gublins, gana el juego y se lanza una excepción "GreetingsNotFoundException"
+
+La clase Gublin tiene la misma funcionalidad que la clase Player, con algunas diferencias:
+- Cuando hace daño, tiene una posibilidad sobre cinco de fallar automáticamente.
+- Cuando recibe daño, tiene una posibilidad sobre cinco de asustarse y curar el siguiente turno.
+- Cuando se cura pierde el siguiente turno.
+- Cuando muere no devuelve una excepción.
+- No puede subir de nivel.
+
+Jesús tiene que implementar la clase Gublin, acabar la clase Player y la clase Game Controller para cumplir con lo
+descrito arriba y hacer una clase que testée el funcionamiento de los métodos públicos de Gublin.
