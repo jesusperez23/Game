@@ -17,6 +17,6 @@ public class Messages {
     }
 
     public void getMessage(String key, String value, String name) {
-        System.out.println(name + ": " + this.messagesMap.get(key).replaceAll("/(%%)/", value));
+        System.out.println(name + ": " + this.messagesMap.get(key).replaceAll("%%", value));
     }
 }
